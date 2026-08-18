@@ -223,7 +223,7 @@ function Index() {
               className="rounded-2xl border border-border bg-card p-7 text-center shadow-card transition-transform hover:-translate-y-1"
             >
               <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-secondary">
-                <f.icon className="size-7 text-primary" />
+                <f.icon className="size-7 text-accent" />
               </div>
               <h3 className="mt-4 font-display text-lg font-bold">{f.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
