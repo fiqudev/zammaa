@@ -165,14 +165,14 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-secondary">
+      <section className="bg-secondary text-secondary-foreground">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">Phone Savings</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Phone Savings</span>
             <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
               Save small, own the phone you want
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 opacity-80">
               No pressure. Save any amount through Airtel Merchant 7040710 and collect your device when
               your balance is enough. Perfect for students, professionals and families.
             </p>
@@ -187,13 +187,13 @@ function Index() {
                 href={waLink("Hello Zama Gadgets, I want to know more about the phone savings plan.")}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-background"
+                className="inline-flex rounded-full border border-secondary-foreground/25 px-6 py-3 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary-foreground/10"
               >
                 Ask on WhatsApp
               </a>
             </div>
           </div>
-          <div className="rounded-3xl bg-ink p-8 text-ink-foreground">
+          <div className="rounded-3xl bg-ink p-8 text-ink-foreground ring-1 ring-ink-foreground/10">
             <div className="grid gap-6 sm:grid-cols-2">
               {[
                 { title: "Daily savings", body: "Save any amount, any day" },
