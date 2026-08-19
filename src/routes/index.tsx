@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Zama Gadgets sells new and used iPhones, MacBooks, tablets, accessories, swaps, topups and repairs in Kampala. Phone savings available via Airtel Merchant 7040710. Delivered across Uganda and the region.",
+          "Zama Gadgets sells new and used iPhones, MacBooks, tablets, smart gadgets, accessories, swaps and repairs in Kampala. Phone savings available via Airtel Merchant 7040710. Delivered across Uganda and the region.",
       },
       {
         property: "og:title",
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Quality Beyond. Shop iPhones, MacBooks, tablets and accessories. Order on WhatsApp, save through Airtel Merchant 7040710, or visit us at New Pioneer Mall, Wilson Street.",
+          "Quality Beyond. Shop iPhones, MacBooks, tablets, smart gadgets and accessories. Order on WhatsApp, save through Airtel Merchant 7040710, or visit us at New Pioneer Mall, Wilson Street.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -45,7 +45,7 @@ const FEATURES = [
   {
     icon: BadgeCheck,
     title: "Tested devices",
-    body: "Every phone and laptop is inspected for authenticity, battery health and performance before it reaches you.",
+    body: "Every gadget and device is inspected for authenticity, battery health and performance before it reaches you.",
   },
   {
     icon: Wrench,
@@ -88,7 +88,7 @@ function Index() {
               Your trusted gadget store in Kampala
             </h1>
             <p className="mt-5 max-w-md text-lg opacity-85">
-              New and used iPhones, MacBooks, tablets, accessories, swaps, topups and repairs.
+              New and used iPhones, MacBooks, tablets, smart gadgets, accessories, swaps and repairs.
               Quality Beyond, delivered across Uganda and the region.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
