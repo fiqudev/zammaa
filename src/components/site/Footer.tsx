@@ -44,7 +44,7 @@ export function Footer() {
       <div className="border-t border-ink-foreground/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs opacity-60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Zama Gadgets. Quality Beyond.</p>
-          <p>Savings via Airtel Merchant {SITE.merchant}</p>
+          <p>Savings via Airtel Merchant {SITE.merchant} · MTN Merchant {SITE.mtnMerchant}</p>
         </div>
       </div>
     </footer>
