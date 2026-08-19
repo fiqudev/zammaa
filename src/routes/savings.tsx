@@ -7,9 +7,9 @@ export const Route = createFileRoute("/savings")({
   head: () => ({
     meta: [
       { title: "Phone Savings Plan | Save & Own Your Phone — Zama Gadgets" },
-      { name: "description", content: "Save little by little through Airtel Merchant 7040710 and collect your phone when your savings are enough. Flexible, transparent and recorded." },
+      { name: "description", content: "Save little by little through Airtel Merchant 7040710 or MTN Merchant 82992038 and collect your phone when your savings are enough. Flexible, transparent and recorded." },
       { property: "og:title", content: "Phone Savings Plan | Zama Gadgets" },
-      { property: "og:description", content: "Save towards any phone through Airtel Merchant 7040710 and pick it up when you reach the amount." },
+      { property: "og:description", content: "Save towards any phone through Airtel Merchant 7040710 or MTN Merchant 82992038 and pick it up when you reach the amount." },
     ],
   }),
   component: Savings,
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/savings")({
 
 const STEPS = [
   { icon: PhoneCall, title: "1. Tell us your target", body: "Call or WhatsApp us with the phone you want. We agree on the amount and reserve it for you." },
-  { icon: Wallet, title: "2. Save at your pace", body: `Send any amount, any day, to our Airtel Merchant number ${SITE.merchant}. Daily, weekly or monthly — you decide.` },
+  { icon: Wallet, title: "2. Save at your pace", body: `Send any amount, any day, to our Airtel Merchant ${SITE.merchant} or MTN Merchant ${SITE.mtnMerchant}. Daily, weekly or monthly — you decide.` },
   { icon: PiggyBank, title: "3. We record every deposit", body: "Each payment is recorded against your name and phone number. Ask for your balance at any time." },
   { icon: CheckCircle2, title: "4. Collect your phone", body: "When your savings reach the amount, walk into the shop or ask us to deliver it to you." },
 ];
@@ -35,10 +35,17 @@ function Savings() {
               little, and when your savings reach the price of the phone you want, you simply come
               and pick it up.
             </p>
-            <div className="mt-8 inline-flex flex-col gap-1 rounded-2xl bg-ink-foreground/10 p-6 ring-1 ring-ink-foreground/15">
-              <span className="text-xs uppercase tracking-widest opacity-70">Airtel Merchant Number</span>
-              <span className="font-display text-4xl font-bold text-accent">{SITE.merchant}</span>
-              <span className="text-xs opacity-70">Registered as Zama Gadgets</span>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="inline-flex flex-col gap-1 rounded-2xl bg-ink-foreground/10 p-6 ring-1 ring-ink-foreground/15">
+                <span className="text-xs uppercase tracking-widest opacity-70">Airtel Merchant Number</span>
+                <span className="font-display text-4xl font-bold text-accent">{SITE.merchant}</span>
+                <span className="text-xs opacity-70">Registered as Zama Gadgets</span>
+              </div>
+              <div className="inline-flex flex-col gap-1 rounded-2xl bg-ink-foreground/10 p-6 ring-1 ring-ink-foreground/15">
+                <span className="text-xs uppercase tracking-widest opacity-70">MTN Merchant Code</span>
+                <span className="font-display text-4xl font-bold text-accent">{SITE.mtnMerchant}</span>
+                <span className="text-xs opacity-70">Registered as Zama Gadgets</span>
+              </div>
             </div>
           </div>
           <img src={savings.url} alt="Customer saving for a phone using mobile money" loading="lazy" width={1200} height={900} className="rounded-3xl object-cover shadow-glow" />
@@ -63,7 +70,7 @@ function Savings() {
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>Minimum deposit is UGX 50,000 — save any amount from there, any day.</li>
               <li>Your savings can be moved to a different model if you change your mind.</li>
-              <li>Always use the merchant number {SITE.merchant} and keep your Airtel message as proof.</li>
+              <li>Always use Airtel Merchant {SITE.merchant} or MTN Merchant {SITE.mtnMerchant} and keep the payment message as proof.</li>
               <li>Send us a screenshot on WhatsApp after every deposit so we update your record.</li>
             </ul>
           </div>
