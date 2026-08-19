@@ -173,7 +173,7 @@ function Index() {
               Save small, own the phone you want
             </h2>
             <p className="mt-4 opacity-80">
-              No pressure. Save any amount through Airtel Merchant 7040710 and collect your device when
+              No pressure. Save any amount through Airtel Merchant 7040710 or MTN Merchant 82992038 and collect your device when
               your balance is enough. Perfect for students, professionals and families.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

@@ -29,6 +29,12 @@ import i17pro from "@/assets/products/iphone-17-pro.webp.asset.json";
 import i17promax from "@/assets/products/iphone-17-pro-max.webp.asset.json";
 import iair from "@/assets/products/iphone-air.webp.asset.json";
 import mbProM5 from "@/assets/products/macbook-pro-m5.webp.asset.json";
+import mbpM5Max from "@/assets/products/mbp-m5-max.webp.asset.json";
+import mbp2020 from "@/assets/products/mbp-2020.webp.asset.json";
+import mbp2019 from "@/assets/products/mbp-2019.webp.asset.json";
+import mbp2018 from "@/assets/products/mbp-2018.webp.asset.json";
+import mba2020 from "@/assets/products/mba-2020.webp.asset.json";
+import mba2019 from "@/assets/products/mba-2019.webp.asset.json";
 import ipad10 from "@/assets/products/ipad-10.webp.asset.json";
 import ipadAirM3 from "@/assets/products/ipad-air-m3.webp.asset.json";
 
@@ -72,6 +78,12 @@ export const PRODUCTS: Product[] = [
   { id: "iphone-air", name: "iPhone Air", category: "iPhones", condition: "Brand New", specs: "6.5\" 120Hz · 48MP Fusion · Ultra-thin titanium", image: iair.url },
 
   { id: "macbook-pro-m5", name: "MacBook Pro M5", category: "MacBooks", condition: "Brand New", specs: "Apple M5 chip · Liquid Retina XDR display", image: mbProM5.url, badge: "Pro" },
+  { id: "macbook-pro-m5-max", name: "MacBook Pro M5 Max", category: "MacBooks", condition: "Brand New", specs: "M5 Max · Liquid Retina XDR · Thunderbolt 5 · Wi-Fi 7", image: mbpM5Max.url, badge: "New arrival" },
+  { id: "macbook-pro-13-2020", name: "MacBook Pro 13\" (2020)", category: "MacBooks", condition: "UK Used", specs: "Retina display · Magic Keyboard · Touch Bar & Touch ID", image: mbp2020.url },
+  { id: "macbook-pro-13-2019", name: "MacBook Pro 13\" (2019)", category: "MacBooks", condition: "UK Used", specs: "Retina display · Intel Core · Thunderbolt 3 · SSD", image: mbp2019.url },
+  { id: "macbook-pro-13-2018", name: "MacBook Pro 13\" (2018)", category: "MacBooks", condition: "UK Used", specs: "Retina True Tone · Touch Bar · Touch ID · SSD", image: mbp2018.url },
+  { id: "macbook-air-13-2020", name: "MacBook Air 13\" (2020)", category: "MacBooks", condition: "UK Used", specs: "Retina True Tone · Magic Keyboard · Touch ID", image: mba2020.url },
+  { id: "macbook-air-13-2019", name: "MacBook Air 13\" (2019)", category: "MacBooks", condition: "UK Used", specs: "Retina True Tone · Touch ID · All-day battery", image: mba2019.url },
   { id: "macbook-air-m1", name: "MacBook Air M1", category: "MacBooks", condition: "UK Used", specs: "8GB RAM · 256GB SSD · 13\"", image: laptop.url },
   { id: "macbook-air-m2", name: "MacBook Air M2", category: "MacBooks", condition: "New & Used", specs: "8/16GB RAM · 256–512GB SSD", image: laptopGrey.url },
   { id: "macbook-pro-14", name: "MacBook Pro 14\" M3 Pro", category: "MacBooks", condition: "Brand New", specs: "18GB RAM · 512GB SSD · Liquid Retina", image: laptop.url },
