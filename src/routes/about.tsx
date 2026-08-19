@@ -45,7 +45,7 @@ function About() {
             {" "}{SITE.address}, serving walk-in customers, online buyers and clients across East Africa.
           </p>
           <p className="mt-4 text-muted-foreground">
-            Beyond selling, we repair, swap, do topups and run a phone savings plan that has helped
+            Beyond selling, we repair, swap and run a phone savings plan that has helped
             hundreds of people own devices they once thought were out of reach.
           </p>
           <Link to="/shop" className="mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow">

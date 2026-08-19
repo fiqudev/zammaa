@@ -61,10 +61,10 @@ function Savings() {
           <div>
             <h3 className="font-display text-xl font-bold">Good to know</h3>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li>• No minimum deposit — save whatever you can afford that day.</li>
-              <li>• Your savings can be moved to a different model if you change your mind.</li>
-              <li>• Always use the merchant number {SITE.merchant} and keep your Airtel message as proof.</li>
-              <li>• Send us a screenshot on WhatsApp after every deposit so we update your record.</li>
+              <li>Minimum deposit is UGX 50,000 — save any amount from there, any day.</li>
+              <li>Your savings can be moved to a different model if you change your mind.</li>
+              <li>Always use the merchant number {SITE.merchant} and keep your Airtel message as proof.</li>
+              <li>Send us a screenshot on WhatsApp after every deposit so we update your record.</li>
             </ul>
           </div>
           <div className="flex flex-col justify-center gap-4 rounded-2xl bg-secondary p-8 text-secondary-foreground">
