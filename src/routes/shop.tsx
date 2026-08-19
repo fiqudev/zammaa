@@ -8,10 +8,10 @@ import { SITE, waLink } from "@/data/site";
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop iPhones, MacBooks & Tablets | Zama Gadgets Kampala" },
-      { name: "description", content: "Browse new and UK used iPhones from iPhone 11, MacBooks, iPads and accessories. Order instantly on WhatsApp with delivery across Uganda." },
-      { property: "og:title", content: "Shop iPhones, MacBooks & Tablets | Zama Gadgets" },
-      { property: "og:description", content: "New and used iPhones, MacBooks, tablets and accessories. Order on WhatsApp, delivered countrywide." },
+        { title: "Shop iPhones, MacBooks, Tablets & Smart Gadgets | Zama Gadgets Kampala" },
+      { name: "description", content: "Browse new and UK used iPhones from iPhone 11, MacBooks, iPads, smart gadgets and accessories. Order instantly on WhatsApp with delivery across Uganda." },
+      { property: "og:title", content: "Shop iPhones, MacBooks, Tablets & Smart Gadgets | Zama Gadgets" },
+      { property: "og:description", content: "New and used iPhones, MacBooks, tablets, smart gadgets and accessories. Order on WhatsApp, delivered countrywide." },
     ],
   }),
   component: Shop,
