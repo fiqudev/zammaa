@@ -16,9 +16,8 @@ export const Route = createFileRoute("/services")({
 });
 
 const SERVICES = [
-  { icon: Wrench, title: "Repair services", body: "Screen replacement, battery, charging port, camera, water damage and software fixes for iPhones, Androids, iPads and MacBooks." },
-  { icon: ArrowLeftRight, title: "Swaps & trade-in", body: "Bring your old device, we value it fairly and you top up the balance for the phone you want." },
-  { icon: Zap, title: "Airtime & data topups", body: "Fast airtime, data bundles and mobile money topups for all networks, right at the shop." },
+  { icon: Wrench, title: "Repair services", body: "Screen replacement, battery, charging port, camera, water damage and software fixes for iPhones, Androids, iPads, MacBooks and other gadgets." },
+  { icon: ArrowLeftRight, title: "Swaps & trade-in", body: "Bring your old device, we value it fairly and you top up the balance for the phone or gadget you want." },
   { icon: Smartphone, title: "Unlocking & setup", body: "Network unlocking, iCloud guidance, data transfer and full setup before you leave the counter." },
   { icon: ShieldCheck, title: "Device check-up", body: "Free honest inspection — battery health, IMEI status and originality check before you buy anywhere." },
   { icon: Truck, title: "Countrywide delivery", body: "Delivery to all parts of Uganda and to neighbouring countries through trusted couriers and bus services." },

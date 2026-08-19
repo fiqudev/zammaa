@@ -6,9 +6,9 @@ import { SITE } from "@/data/site";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Zama Gadgets | Trusted Phone Shop in Kampala" },
-      { name: "description", content: "Zama Gadgets sells new and used iPhones, MacBooks and tablets at New Pioneer Mall, Wilson Street, Kampala. Quality Beyond — swaps, repairs, topups and phone savings." },
-      { property: "og:title", content: "About Zama Gadgets | Trusted Phone Shop in Kampala" },
+      { title: "About Zama Gadgets | Trusted Gadget Shop in Kampala" },
+      { name: "description", content: "Zama Gadgets sells new and used iPhones, MacBooks, tablets, smart gadgets and accessories at New Pioneer Mall, Wilson Street, Kampala. Quality Beyond — swaps, repairs and phone savings." },
+      { property: "og:title", content: "About Zama Gadgets | Trusted Gadget Shop in Kampala" },
       { property: "og:description", content: "Who we are: a Kampala-based gadget shop built on honest deals, genuine devices and real customer care." },
     ],
   }),
@@ -45,7 +45,7 @@ function About() {
             {" "}{SITE.address}, serving walk-in customers, online buyers and clients across East Africa.
           </p>
           <p className="mt-4 text-muted-foreground">
-            Beyond selling, we repair, swap, do topups and run a phone savings plan that has helped
+            Beyond selling, we repair, swap and run a phone savings plan that has helped
             hundreds of people own devices they once thought were out of reach.
           </p>
           <Link to="/shop" className="mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow">

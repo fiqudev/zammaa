@@ -14,7 +14,7 @@ export function Footer() {
           </div>
           <p className="mt-4 max-w-md text-sm opacity-75">
             Thank you for supporting Zama Gadgets. Your trust keeps us going — new and used
-            iPhones, MacBooks, tablets, accessories, swaps, topups, repairs and phone savings,
+            iPhones, MacBooks, tablets, accessories, smart gadgets, swaps, repairs and phone savings,
             delivered across Uganda and the region.
           </p>
         </div>
