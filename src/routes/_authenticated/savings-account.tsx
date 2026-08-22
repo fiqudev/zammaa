@@ -73,9 +73,10 @@ function SavingsAccount() {
   const progress = target > 0 ? Math.min(100, (totals.confirmed / target) * 100) : 0;
 
   async function signOut() {
-    await supabase.auth.signOut();
+    await qc.cancelQueries();
     qc.clear();
-    navigate({ to: "/" });
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
   }
 
   return (
