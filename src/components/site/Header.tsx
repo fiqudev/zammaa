@@ -1,8 +1,11 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import type { Session } from "@supabase/supabase-js";
+import { Menu, X, Phone, PiggyBank, LogOut } from "lucide-react";
+import { toast } from "sonner";
 import logo from "@/assets/zama-logo.png.asset.json";
 import { SITE, waLink } from "@/data/site";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -15,6 +18,21 @@ const NAV = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
+    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  async function signOut() {
+    await supabase.auth.signOut();
+    toast.success("Signed out");
+    setOpen(false);
+    navigate({ to: "/" });
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur">
@@ -50,9 +68,31 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link
+            to="/savings-account"
+            activeProps={{ className: "bg-secondary text-secondary-foreground" }}
+            className="rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            My Savings
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
+          {session ? (
+            <button
+              onClick={signOut}
+              className="hidden items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted sm:inline-flex"
+            >
+              <LogOut className="size-4" /> Sign out
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              className="hidden items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted sm:inline-flex"
+            >
+              <PiggyBank className="size-4" /> Sign in
+            </Link>
+          )}
           <a
             href={waLink("Hello Zama Gadgets, I would like to make an order.")}
             target="_blank"
@@ -83,6 +123,29 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link
+            to="/savings-account"
+            onClick={() => setOpen(false)}
+            className="block rounded-md px-3 py-2.5 text-sm font-medium hover:bg-muted"
+          >
+            My Savings
+          </Link>
+          {session ? (
+            <button
+              onClick={signOut}
+              className="block w-full rounded-md px-3 py-2.5 text-left text-sm font-medium hover:bg-muted"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-3 py-2.5 text-sm font-medium hover:bg-muted"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       )}
     </header>
