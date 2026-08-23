@@ -23,6 +23,8 @@ export type Database = {
           goal_id: string | null
           id: string
           network: string
+          payer_phone: string
+          provider_ref: string
           reference: string
           status: string
           user_id: string
@@ -35,6 +37,8 @@ export type Database = {
           goal_id?: string | null
           id?: string
           network: string
+          payer_phone?: string
+          provider_ref?: string
           reference?: string
           status?: string
           user_id: string
@@ -47,6 +51,8 @@ export type Database = {
           goal_id?: string | null
           id?: string
           network?: string
+          payer_phone?: string
+          provider_ref?: string
           reference?: string
           status?: string
           user_id?: string
