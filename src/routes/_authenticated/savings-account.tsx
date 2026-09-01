@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Check, Copy, LogOut, PhoneCall, PiggyBank, Plus } from "lucide-react";
+import { Check, Copy, Loader2, LogOut, PhoneCall, PiggyBank, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { SITE, waLink } from "@/data/site";
-import { MIN_DEPOSIT, NETWORKS, dialLink, formatUGX, type NetworkId } from "@/lib/ussd";
+import { MIN_DEPOSIT, NETWORKS, formatUGX, type NetworkId } from "@/lib/ussd";
+import { initiateDepositPayment, syncDepositStatus } from "@/lib/payments.functions";
 
 export const Route = createFileRoute("/_authenticated/savings-account")({
   head: () => ({
