@@ -6,7 +6,7 @@ export type PushStatus = "pending" | "success" | "failed";
 
 export interface StatusResult {
   status: PushStatus;
-  amount?: number;
+  amount?: number | undefined;
 }
 
 /** Normalizes Ugandan phone input (0700…, +256…, 256…, 7…) to 2567XXXXXXXX. */

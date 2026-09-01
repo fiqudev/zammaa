@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Check, Copy, LogOut, PhoneCall, PiggyBank, Plus } from "lucide-react";
+import { Check, Copy, Loader2, LogOut, PhoneCall, PiggyBank, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { SITE, waLink } from "@/data/site";
-import { MIN_DEPOSIT, NETWORKS, dialLink, formatUGX, type NetworkId } from "@/lib/ussd";
+import { MIN_DEPOSIT, NETWORKS, formatUGX, type NetworkId } from "@/lib/ussd";
+import { initiateDepositPayment, syncDepositStatus } from "@/lib/payments.functions";
 
 export const Route = createFileRoute("/_authenticated/savings-account")({
   head: () => ({
@@ -266,41 +268,82 @@ function GoalForm({ onSaved }: { onSaved: () => void }) {
   );
 }
 
+type Phase = "idle" | "prompting" | "confirmed" | "failed";
+
 function DepositCard({ goalId, onSaved }: { goalId: string | null; onSaved: () => void }) {
   const [network, setNetwork] = useState<NetworkId>("mtn");
   const [amount, setAmount] = useState("");
+  const [phone, setPhone] = useState("");
   const [copied, setCopied] = useState(false);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [note, setNote] = useState("");
+  const [manualMode, setManualMode] = useState(false);
   const info = NETWORKS[network];
   const value = Number(amount || 0);
 
-  const record = useMutation({
-    mutationFn: async () => {
-      const { data: auth } = await supabase.auth.getUser();
-      if (!auth.user) throw new Error("Please sign in again");
-      const { error } = await supabase.from("deposits").insert({
-        user_id: auth.user.id,
-        goal_id: goalId,
-        amount: value,
-        network,
-      });
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      toast.success("Deposit recorded — Zama will confirm it shortly.");
-      setAmount("");
-      onSaved();
-    },
-    onError: (e) => toast.error(e instanceof Error ? e.message : "Could not record deposit"),
-  });
+  const initiate = useServerFn(initiateDepositPayment);
+  const sync = useServerFn(syncDepositStatus);
 
-  function startPayment() {
-    if (value < MIN_DEPOSIT) {
-      toast.error(`Minimum deposit is ${formatUGX(MIN_DEPOSIT)}`);
-      return;
+  /** Polls the network until the customer enters (or abandons) their PIN. */
+  async function waitForPin(depositId: string) {
+    const deadline = Date.now() + 3 * 60 * 1000;
+    while (Date.now() < deadline) {
+      await new Promise((r) => setTimeout(r, 4000));
+      let status: string;
+      try {
+        ({ status } = await sync({ data: { depositId } }));
+      } catch {
+        continue;
+      }
+      if (status === "confirmed") {
+        setPhase("confirmed");
+        setNote("Payment received — your savings balance has been updated.");
+        setAmount("");
+        onSaved();
+        toast.success("Deposit confirmed and added to your savings");
+        return;
+      }
+      if (status === "rejected") {
+        setPhase("failed");
+        setNote("The payment was not completed, so nothing was saved. You can try again.");
+        onSaved();
+        return;
+      }
     }
-    record.mutate();
-    window.location.href = dialLink(network);
+    setPhase("failed");
+    setNote(
+      "We did not get a confirmation in time. If you entered your PIN, it will appear once our team verifies it.",
+    );
+    onSaved();
   }
+
+  const start = useMutation({
+    mutationFn: async () => {
+      if (value < MIN_DEPOSIT) throw new Error(`Minimum deposit is ${formatUGX(MIN_DEPOSIT)}`);
+      const res = await initiate({
+        data: { amount: value, phone, network, goalId },
+      });
+      if (!res.ok) {
+        if (res.reason === "not_configured") {
+          setManualMode(true);
+          throw new Error(
+            "Automatic mobile money is not switched on yet — use the merchant steps below.",
+          );
+        }
+        throw new Error("The network could not send the PIN prompt. Please try again.");
+      }
+      setPhase("prompting");
+      setNote(
+        `Check ${phone} — enter your ${info.short} PIN on the prompt to complete the payment.`,
+      );
+      onSaved();
+      await waitForPin(res.depositId!);
+    },
+    onError: (e) => {
+      setPhase("idle");
+      toast.error(e instanceof Error ? e.message : "Could not start the payment");
+    },
+  });
 
   async function copyMerchant() {
     await navigator.clipboard.writeText(info.merchant);
@@ -309,12 +352,14 @@ function DepositCard({ goalId, onSaved }: { goalId: string | null; onSaved: () =
     setTimeout(() => setCopied(false), 2000);
   }
 
+  const busy = start.isPending || phase === "prompting";
+
   return (
     <div className="rounded-3xl border border-border bg-card p-7 shadow-card">
       <h2 className="font-display text-xl font-bold">Save now</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Choose your network, enter the amount and tap Save. Your phone opens the payment menu — you
-        only confirm the amount and enter your PIN.
+        Enter the amount and your mobile money number. A PIN prompt appears on your phone — enter
+        your PIN and your balance updates automatically. If you don’t, nothing is saved.
       </p>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
@@ -322,11 +367,12 @@ function DepositCard({ goalId, onSaved }: { goalId: string | null; onSaved: () =
           <button
             key={n.id}
             type="button"
+            disabled={busy}
             onClick={() => setNetwork(n.id)}
             className={
               network === n.id
                 ? "rounded-2xl border-2 border-primary bg-primary/10 px-4 py-3 text-sm font-semibold"
-                : "rounded-2xl border border-border px-4 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                : "rounded-2xl border border-border px-4 py-3 text-sm font-semibold transition-colors hover:bg-muted disabled:opacity-60"
             }
           >
             {n.label}
@@ -346,22 +392,63 @@ function DepositCard({ goalId, onSaved }: { goalId: string | null; onSaved: () =
           min={MIN_DEPOSIT}
           step={1000}
           value={amount}
+          disabled={busy}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="50000"
-          className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
+          className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary disabled:opacity-60"
+        />
+      </label>
+
+      <label className="mt-4 block">
+        <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          {info.short} number to charge
+        </span>
+        <input
+          type="tel"
+          value={phone}
+          disabled={busy}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="0700 000 000"
+          className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary disabled:opacity-60"
         />
       </label>
 
       <button
-        onClick={startPayment}
-        disabled={record.isPending}
+        onClick={() => {
+          setNote("");
+          setPhase("idle");
+          start.mutate();
+        }}
+        disabled={busy}
         className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow disabled:opacity-60"
       >
-        <PhoneCall className="size-4" /> Save {value >= MIN_DEPOSIT ? formatUGX(value) : ""} with{" "}
-        {info.short}
+        {phase === "prompting" ? (
+          <>
+            <Loader2 className="size-4 animate-spin" /> Waiting for your PIN…
+          </>
+        ) : (
+          <>
+            <PhoneCall className="size-4" /> Save {value >= MIN_DEPOSIT ? formatUGX(value) : ""} with{" "}
+            {info.short}
+          </>
+        )}
       </button>
 
-      <div className="mt-5 rounded-2xl bg-muted/50 p-5">
+      {note && (
+        <p
+          className={
+            phase === "confirmed"
+              ? "mt-4 rounded-2xl bg-primary/10 p-4 text-sm font-medium text-primary"
+              : phase === "failed"
+                ? "mt-4 rounded-2xl bg-destructive/10 p-4 text-sm font-medium text-destructive"
+                : "mt-4 rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground"
+          }
+        >
+          {note}
+        </p>
+      )}
+
+      <div className="mt-6 rounded-2xl bg-muted/50 p-5">
         <div className="flex items-center justify-between gap-3">
           <div>
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -377,7 +464,12 @@ function DepositCard({ goalId, onSaved }: { goalId: string | null; onSaved: () =
             {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />} Copy
           </button>
         </div>
-        <ol className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+        <p className="mt-3 text-xs text-muted-foreground">
+          {manualMode
+            ? "Backup method — pay the merchant code yourself and our team will confirm it:"
+            : "Backup method if the prompt does not reach your phone:"}
+        </p>
+        <ol className="mt-3 space-y-1.5 text-sm text-muted-foreground">
           {info.steps.map((s, i) => (
             <li key={s}>
               {i + 1}. {s}
