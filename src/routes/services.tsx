@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeftRight, Smartphone, Wrench, Zap, ShieldCheck, Truck } from "lucide-react";
-import repair from "@/assets/repair.jpg.asset.json";
+import repair from "@/assets/repair.jpg";
 import { waLink } from "@/data/site";
 
 export const Route = createFileRoute("/services")({
@@ -47,7 +47,7 @@ function Services() {
 
       <section className="mx-auto max-w-7xl px-4 pb-20">
         <div className="grid items-center gap-10 overflow-hidden rounded-3xl border border-border bg-card shadow-card md:grid-cols-2">
-          <img src={repair.url} alt="Technician repairing a smartphone at Zama Gadgets" loading="lazy" width={1200} height={800} className="h-full w-full object-cover" />
+          <img src={repair} alt="Technician repairing a smartphone at Zama Gadgets" loading="lazy" width={1200} height={800} className="h-full w-full object-cover" />
           <div className="p-8 md:p-12">
             <h2 className="text-3xl font-bold">Same-day repairs by certified technicians</h2>
             <p className="mt-4 text-muted-foreground">

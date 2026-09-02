@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
-import logo from "@/assets/zama-logo.png.asset.json";
+import logo from "@/assets/zama-logo.png";
 import { SITE } from "@/data/site";
 
 export function Footer() {
@@ -9,7 +9,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
-            <img src={logo.url} alt="Zama Gadgets logo" width={48} height={48} loading="lazy" className="h-12 w-12 rounded-md bg-ink-foreground/95 object-contain p-1" />
+            <img src={logo} alt="Zama Gadgets logo" width={48} height={48} loading="lazy" className="h-12 w-12 rounded-md bg-ink-foreground/95 object-contain p-1" />
             <span className="font-display text-xl font-bold">ZAMA GADGETS</span>
           </div>
           <p className="mt-4 max-w-md text-sm opacity-75">

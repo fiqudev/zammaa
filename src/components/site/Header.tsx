@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { Menu, X, Phone, PiggyBank, LogOut } from "lucide-react";
 import { toast } from "sonner";
-import logo from "@/assets/zama-logo.png.asset.json";
+import logo from "@/assets/zama-logo.png";
 import { SITE, waLink } from "@/data/site";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -49,7 +49,7 @@ export function Header() {
 
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logo.url} alt="Zama Gadgets logo" width={48} height={48} className="h-11 w-11 rounded-md object-contain" />
+          <img src={logo} alt="Zama Gadgets logo" width={48} height={48} className="h-11 w-11 rounded-md object-contain" />
           <span className="leading-tight">
             <span className="block font-display text-lg font-bold tracking-tight">ZAMA GADGETS</span>
             <span className="block text-[11px] uppercase tracking-[0.25em] text-muted-foreground">{SITE.tagline}</span>

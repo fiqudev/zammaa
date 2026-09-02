@@ -1,35 +1,35 @@
 import { Star } from "lucide-react";
-import t1 from "@/assets/t1.jpg.asset.json";
-import t2 from "@/assets/t2.jpg.asset.json";
-import t3 from "@/assets/t3.jpg.asset.json";
-import t4 from "@/assets/t4.jpg.asset.json";
+import t1 from "@/assets/t1.jpg";
+import t2 from "@/assets/t2.jpg";
+import t3 from "@/assets/t3.jpg";
+import t4 from "@/assets/t4.jpg";
 
 const REVIEWS = [
   {
     name: "Denis Kirabo",
     place: "Kampala, Uganda",
-    image: t1.url,
+    image: t1,
     rating: 5,
     text: "I bought a UK used iPhone 13 Pro Max from their shop at New Pioneer. Battery health was exactly what they told me. Genuine people, no stories.",
   },
   {
     name: "Sarah Nakato",
     place: "Mukono, Uganda",
-    image: t2.url,
+    image: t2,
     rating: 5,
     text: "I saved with them through the Airtel merchant number for four months and picked up my iPhone 14. They kept every record and never disappointed me.",
   },
   {
     name: "Emmanuel Mwangi",
     place: "Nairobi, Kenya",
-    image: t3.url,
+    image: t3,
     rating: 5,
     text: "Ordered a MacBook Air M2 on WhatsApp from Nairobi. Clear photos, fair price and it reached me safely. I will definitely buy again.",
   },
   {
     name: "Grace Uwase",
     place: "Kigali, Rwanda",
-    image: t4.url,
+    image: t4,
     rating: 5,
     text: "My screen was cracked and they repaired it the same day I sent it. Then they swapped my old phone and I added a small balance. Very fair.",
   },
