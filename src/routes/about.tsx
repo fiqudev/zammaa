@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Testimonials } from "@/components/site/Testimonials";
-import logo from "@/assets/zama-logo.png.asset.json";
+import logo from "@/assets/zama-logo.png";
 import { SITE } from "@/data/site";
 
 export const Route = createFileRoute("/about")({
@@ -27,7 +27,7 @@ function About() {
     <div>
       <section className="surface-hero">
         <div className="mx-auto max-w-7xl px-4 py-16">
-          <img src={logo.url} alt="Zama Gadgets logo" loading="lazy" width={80} height={80} className="h-20 w-20 rounded-xl bg-ink-foreground/95 object-contain p-2" />
+          <img src={logo} alt="Zama Gadgets logo" loading="lazy" width={80} height={80} className="h-20 w-20 rounded-xl bg-ink-foreground/95 object-contain p-2" />
           <h1 className="mt-6 text-4xl font-bold sm:text-5xl">Quality Beyond</h1>
           <p className="mt-4 max-w-2xl opacity-80">
             Zama Gadgets is a Kampala-based gadget store built on one simple promise: sell honest

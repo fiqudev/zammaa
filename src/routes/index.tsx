@@ -8,7 +8,7 @@ import {
   Wrench,
   Zap,
 } from "lucide-react";
-import hero from "@/assets/hero.jpg.asset.json";
+import hero from "@/assets/hero.jpg";
 import { Testimonials } from "@/components/site/Testimonials";
 import { ProductCard } from "@/components/site/ProductCard";
 import { PRODUCTS } from "@/data/products";
@@ -112,7 +112,7 @@ function Index() {
           </div>
           <div className="relative">
             <img
-              src={hero.url}
+              src={hero}
               alt="Premium iPhone and MacBook displayed in dramatic lighting"
               width={1600}
               height={1104}

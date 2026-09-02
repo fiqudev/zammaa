@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PiggyBank, Wallet, PhoneCall, CheckCircle2, Smartphone, UserRound } from "lucide-react";
-import savings from "@/assets/savings.jpg.asset.json";
+import savings from "@/assets/savings.jpg";
 import { SITE, waLink } from "@/data/site";
 import { PRODUCTS } from "@/data/products";
 import { MIN_DEPOSIT, NETWORKS, dialLink, formatUGX } from "@/lib/ussd";
@@ -70,7 +70,7 @@ function Savings() {
               </div>
             </div>
           </div>
-          <img src={savings.url} alt="Customer saving for a phone using mobile money" loading="lazy" width={1200} height={900} className="rounded-3xl object-cover shadow-glow" />
+          <img src={savings} alt="Customer saving for a phone using mobile money" loading="lazy" width={1200} height={900} className="rounded-3xl object-cover shadow-glow" />
         </div>
       </section>
 
