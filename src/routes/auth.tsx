@@ -70,16 +70,29 @@ function AuthPage() {
     }
   }
 
-  async function google() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+  async function googleFallback() {
+    // Works on any host (Vercel, custom domains) via the backend's own OAuth flow.
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/savings-account` },
     });
-    if (result.error) {
-      toast.error("Google sign-in failed. Please try again.");
-      return;
+    if (error) toast.error("Google sign-in failed. Please try again.");
+  }
+
+  async function google() {
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        await googleFallback();
+        return;
+      }
+      if (result.redirected) return;
+      navigate({ to: "/savings-account" });
+    } catch {
+      await googleFallback();
     }
-    if (result.redirected) return;
-    navigate({ to: "/savings-account" });
   }
 
   return (
