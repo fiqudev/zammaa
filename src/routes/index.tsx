@@ -3,7 +3,6 @@ import {
   ArrowRight,
   BadgeCheck,
   ShieldCheck,
-  Smartphone,
   Truck,
   Wrench,
   Zap,
@@ -11,6 +10,7 @@ import {
 import hero from "@/assets/hero.jpg";
 import { Testimonials } from "@/components/site/Testimonials";
 import { ProductCard } from "@/components/site/ProductCard";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { PRODUCTS } from "@/data/products";
 import { waLink } from "@/data/site";
 
@@ -110,9 +110,9 @@ function Index() {
                 )}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/15 px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-ink-foreground/10"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-6 py-3.5 text-sm font-semibold text-primary-foreground backdrop-blur-sm transition-colors hover:bg-primary-foreground/10 hover:border-primary-foreground/70"
               >
-                <Smartphone className="size-4" /> Chat on WhatsApp
+                <WhatsAppIcon className="size-4" /> Chat on WhatsApp
               </a>
             </div>
           </div>

@@ -1,5 +1,5 @@
-import { ShoppingBag } from "lucide-react";
 import type { Product } from "@/data/products";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { waLink } from "@/data/site";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -30,9 +30,9 @@ export function ProductCard({ product }: { product: Product }) {
           href={waLink(`Hello Zama Gadgets, I'm interested in the ${product.name} (${product.condition}). Is it available and what's the price?`)}
           target="_blank"
           rel="noreferrer"
-          className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-4 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+          className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-colors hover:bg-whatsapp-hover"
         >
-          <ShoppingBag className="size-4" /> Order on WhatsApp
+          <WhatsAppIcon className="size-4" /> Order on WhatsApp
         </a>
       </div>
     </article>
