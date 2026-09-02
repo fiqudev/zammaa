@@ -93,6 +93,7 @@
   --ink-foreground: oklch(0.98 0.004 90);
   --gradient-hero: linear-gradient(135deg, oklch(0.14 0.008 60) 0%, oklch(0.2 0.03 30) 55%, oklch(0.28 0.09 35) 100%);
   --gradient-brand: linear-gradient(100deg, oklch(0.55 0.22 27), oklch(0.72 0.17 55));
+  --gradient-badge: linear-gradient(100deg, oklch(0.45 0.18 285), oklch(0.5 0.2 305), oklch(0.6 0.16 350));
   --shadow-card: 0 1px 2px oklch(0.14 0.008 60 / 6%), 0 12px 30px -12px oklch(0.14 0.008 60 / 18%);
   --shadow-glow: 0 24px 60px -22px oklch(0.55 0.22 27 / 55%);
   --chart-1: oklch(0.646 0.222 41.116);
