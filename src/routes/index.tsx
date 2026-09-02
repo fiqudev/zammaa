@@ -81,8 +81,14 @@ function Index() {
       <section className="surface-hero">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 lg:grid-cols-2 lg:py-20">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/15 bg-ink-foreground/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
-              <Zap className="size-3.5" /> New arrivals in stock
+            <span className="group relative inline-flex items-center rounded-full p-px transition-transform duration-300 hover:scale-105">
+              <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-40 blur-sm transition-opacity group-hover:opacity-75" />
+              <span className="relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-4 py-1.5 shadow-lg shadow-indigo-500/20">
+                <Zap className="size-3.5 text-white" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-white">
+                  New arrivals in stock
+                </span>
+              </span>
             </span>
             <h1 className="mt-6 text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
               Your trusted gadget store in Kampala
